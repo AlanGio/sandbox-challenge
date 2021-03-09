@@ -1,23 +1,17 @@
 import React from 'react';
-import Image from 'react-bootstrap/Image'
+import Image from 'react-bootstrap/Image';
 
 import './index.scss';
 
-export type PopupProps = {
-  id: number,
-  description: string,
-  time: number,
-  likes: number,
-  image: string,
+type PopupProps = {
+  id: number;
+  description: string;
+  time: number;
+  likes: number;
+  image: string;
 };
 
-export const Popup = ({
-  id,
-  description,
-  time,
-  likes,
-  image,
-}: PopupProps) => {
+export const Popup = ({ id, description, time, likes, image }: PopupProps) => {
   return (
     <div>
       <Image src={image} thumbnail fluid />
@@ -25,6 +19,6 @@ export const Popup = ({
       <p>{description}</p>
     </div>
   );
-}
+};
 
 export default Popup;
