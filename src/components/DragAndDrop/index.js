@@ -1,9 +1,8 @@
-import React from 'react';
 import './index.scss';
 
 const DragAndDrop = props => {
 
-  const { data, dispatch } = props;
+  const { copy, data, dispatch } = props;
 
   const handleDragEnter = e => {
     e.preventDefault();
@@ -52,7 +51,7 @@ const DragAndDrop = props => {
       onDragEnter={e => handleDragEnter(e)}
       onDragLeave={e => handleDragLeave(e)}
     >
-      <p>Drag files here to upload</p>
+      <p>{copy}</p>
     </div>
   );
 };

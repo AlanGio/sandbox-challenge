@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/Image';
 
 import './index.scss';
 
-type PopupProps = {
+export type PopupProps = {
   id: number;
   description: string;
   time: number;
