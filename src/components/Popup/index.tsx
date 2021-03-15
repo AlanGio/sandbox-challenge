@@ -11,14 +11,12 @@ export type PopupProps = {
   image: string;
 };
 
-export const Popup = ({ id, description, time, likes, image }: PopupProps) => {
-  return (
-    <div>
-      <Image src={image} thumbnail fluid />
-      <small>About {time} minutes ago</small> / <small>{likes} Likes</small>
-      <p>{description}</p>
-    </div>
-  );
-};
+export const Popup = ({ description, time, likes, image }: PopupProps) => (
+  <div>
+    <Image src={image} thumbnail fluid />
+    <small>About {time} minutes ago</small> / <small>{likes} Likes</small>
+    <p>{description}</p>
+  </div>
+);
 
 export default Popup;

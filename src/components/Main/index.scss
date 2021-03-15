@@ -1,0 +1,21 @@
+body {
+    .main {
+        
+        .drag-drop-zone {
+            padding: 2rem;
+            text-align: center;
+            background: #eee;
+            margin: 16px 0 32px 0;
+        }
+        
+        .drag-drop-zone p {
+            color: #FFF;
+        }
+        
+        .inside-drag-area {
+            background: #ccc;
+            font-weight: 600;
+        }
+        
+    }
+}
