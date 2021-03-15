@@ -1,13 +1,28 @@
-import React from 'react';
-import Main from './components/Main';
-import './App.css';
+import {
+  Switch, Route, BrowserRouter as Router,
+} from 'react-router-dom';
 
-const App = () => {
+import Main from './components/Main';
+import Register from './components/Register';
+
+
+const Routes = () => {
   return (
-    <div className="App">
-      <Main />
-    </div>
+    <Switch>
+
+      <Route exact path="/" component={Main} />
+      <Route exact path="/register" component={Register} />
+
+    </Switch>
   );
-};
+}
+
+const App = () => (
+  <div className="App">
+    <Router>
+      <Routes />
+    </Router>
+  </div>
+);
 
 export default App;

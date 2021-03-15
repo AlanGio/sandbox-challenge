@@ -81,9 +81,15 @@ const Main = () => {
     setDropZone(false);
   }, []);
 
-  return !isLogged ? (
-    <Login handleIsLogged={() => setIsLogged(true)} />
-  ) : (
+  if (!isLogged) {
+    return <Login handleIsLogged={() => setIsLogged(true)} />;
+  }
+
+  if (!isLogged) {
+    return <Login handleIsLogged={() => setIsLogged(true)} />;
+  }
+
+  return (
     <div className="App main">
       <Container>
         <Row>

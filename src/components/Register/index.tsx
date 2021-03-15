@@ -4,28 +4,29 @@ import { Link } from 'react-router-dom';
 
 import './index.scss';
 
-const Login = ({ handleIsLogged }: { handleIsLogged: () => void }) => {
+const Register = ({ handleIsRegistered }: { handleIsRegistered: () => void }) => {
   const [validated, setValidated] = useState<boolean | undefined>(undefined);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
+
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
       setValidated(false);
     } else {
       setValidated(true);
-      handleIsLogged();
+      handleIsRegistered();
     }
   };
 
   return (
-    <div className="login">
+    <div className="register">
       <Container>
         <Row className="justify-content-md-center">
           <Col sm={5}>
             <Jumbotron>
-              <h2>Login</h2>
+              <h2>Create Account</h2>
               <hr />
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group as={Col} controlId="formBasicEmail">
@@ -64,20 +65,34 @@ const Login = ({ handleIsLogged }: { handleIsLogged: () => void }) => {
                     </Form.Control.Feedback>
                   )}
                 </Form.Group>
-                <Form.Group controlId="formBasicCheckbox">
-                  <Form.Check type="checkbox" label="Remember me" />
+
+                <Form.Group as={Col} controlId="formBasicPasswordConfirm">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    required
+                    type="password"
+                    placeholder="Confirm Password"
+                  />
+                  {validated === false && (
+                    <Form.Control.Feedback
+                      style={{ display: 'block' }}
+                      type="invalid"
+                    >
+                      Please provide a valid password.
+                    </Form.Control.Feedback>
+                  )}
                 </Form.Group>
 
+
                 <div className="text-right">
-                  <Link to="/register">
-                    <Button variant="secondary">Sign Up</Button>
+                  <Link to="/">
+                    <Button variant="secondary">Back to Login</Button>
                   </Link>
                   &nbsp;
                   <Button variant="primary" type="submit">
-                    Sign In
+                    Sign Up
                   </Button>
                 </div>
-
 
               </Form>
             </Jumbotron>
@@ -88,4 +103,4 @@ const Login = ({ handleIsLogged }: { handleIsLogged: () => void }) => {
   );
 };
 
-export default Login;
+export default Register;
