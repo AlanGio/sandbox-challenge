@@ -18,7 +18,9 @@ export const Popup = ({
   handleLike
 }: PopupProps) => (
   <div className="popup">
-    <Image src={image} thumbnail fluid />
+    <div className="image-container">
+      <Image src={image} fluid />
+    </div>
     <small>
       {time > 0
         ? `Posted about ${time} minutes ago`

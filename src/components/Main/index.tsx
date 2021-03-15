@@ -94,7 +94,7 @@ const Main = () => {
         </Row>
 
         <Row>
-          <Col>
+          <Col xs={12} sm={6}>
             <div
               className={classnames('drag-drop-zone', {
                 'inside-drag-area': dropZone
@@ -106,7 +106,7 @@ const Main = () => {
               Drag Image here to post it!
             </div>
           </Col>
-          <Col>
+            <Col xs={12} sm={6} className="search-box">
             <SearchBox handleSearch={handleSearch} />
           </Col>
         </Row>

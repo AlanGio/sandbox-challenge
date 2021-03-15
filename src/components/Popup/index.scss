@@ -1,10 +1,19 @@
 body {
   .popup {
     position: relative;
+
+    .image-container {
+      min-height: 192px;
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      padding: 4px;
+    }
+
     .like-button {
-        position: absolute;
-        right: 16px;
-        top: 16px;
+      position: absolute;
+      right: 16px;
+      top: 16px;
     }
   }
 }
