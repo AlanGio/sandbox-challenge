@@ -17,7 +17,7 @@ export const Popup = ({
   image,
   handleLike
 }: PopupProps) => (
-  <div>
+  <div className="popup">
     <Image src={image} thumbnail fluid />
     <small>
       {time > 0
@@ -26,7 +26,7 @@ export const Popup = ({
     </small>{' '}
     / <small>{likes} Likes</small>
     <p>{description}</p>
-    <Button variant="primary" onClick={(event) => handleLike(event, id)}>
+    <Button className="like-button" variant="primary" onClick={(event) => handleLike(event, id)}>
       Like
     </Button>
   </div>

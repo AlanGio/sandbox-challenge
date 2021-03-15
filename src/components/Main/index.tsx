@@ -10,6 +10,7 @@ import { UploadPopup } from '../UploadPopup';
 import SearchBox from '../SearchBox';
 
 import './index.scss';
+import Login from '../Login';
 
 export type ItemType = {
   id: number;
@@ -24,6 +25,8 @@ const Main = () => {
   const [items, setItems] = useState<ItemType[]>(popupData);
   const [defaultItems, setDefaultItems] = useState<ItemType[]>(popupData);
   const [image, setImage] = useState<File>();
+  const [isLogged, setIsLogged] = useState<boolean>(false);
+
   const [dropZone, setDropZone] = useState<boolean>(false);
 
   const handleLike = (_: React.MouseEvent<HTMLElement>, id: number) => {
@@ -87,7 +90,7 @@ const Main = () => {
     [dropZone]
   );
 
-  return (
+  return !isLogged ? <Login handleIsLogged={() => setIsLogged(true)} /> : (
     <div className="App main">
       <Container>
         <Row>
