@@ -1,21 +1,34 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
+import { ItemType } from '../Main';
 
 import './index.scss';
 
-export type PopupProps = {
-  id: number;
-  description: string;
-  time: number;
-  likes: number;
-  image: string;
+type PopupProps = ItemType & {
+  handleLike: (event: React.MouseEvent<HTMLElement>, id: number) => void;
 };
 
-export const Popup = ({ description, time, likes, image }: PopupProps) => (
+export const Popup = ({
+  id,
+  description,
+  time,
+  likes,
+  image,
+  handleLike
+}: PopupProps) => (
   <div>
     <Image src={image} thumbnail fluid />
-    <small>About {time} minutes ago</small> / <small>{likes} Likes</small>
+    <small>
+      {time > 0
+        ? `Posted about ${time} minutes ago`
+        : `Posted a few seconds ago`}
+    </small>{' '}
+    / <small>{likes} Likes</small>
     <p>{description}</p>
+    <Button variant="primary" onClick={(event) => handleLike(event, id)}>
+      Like
+    </Button>
   </div>
 );
 

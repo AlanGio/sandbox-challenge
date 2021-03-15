@@ -1,23 +1,42 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import classnames from 'classnames';
 import { uniqueId } from 'lodash';
 
 import { popupData } from '../../mocks/popups';
 
-import Popup, { PopupProps } from '../Popup';
+import Popup from '../Popup';
 import { UploadPopup } from '../UploadPopup';
 import SearchBox from '../SearchBox';
 
 import './index.scss';
 
+export type ItemType = {
+  id: number;
+  description: string;
+  time: number;
+  likes: number;
+  image: string;
+};
+
 const Main = () => {
   const [showUploadPopup, setShowUploadPopup] = useState<boolean>(false);
-  const [items, setItems] = useState<PopupProps[]>(popupData);
-  const [defaultItems, setDefaultItems] = useState<PopupProps[]>(popupData);
-
+  const [items, setItems] = useState<ItemType[]>(popupData);
+  const [defaultItems, setDefaultItems] = useState<ItemType[]>(popupData);
   const [image, setImage] = useState<File>();
   const [dropZone, setDropZone] = useState<boolean>(false);
+
+  const handleLike = (_: React.MouseEvent<HTMLElement>, id: number) => {
+    const itemsforLike = [...items];
+
+    const itemLikedIndex = itemsforLike.findIndex(
+      (item: ItemType) => item.id === id
+    );
+    const itemLikedLikes = itemsforLike[itemLikedIndex].likes || 0;
+
+    itemsforLike[itemLikedIndex].likes = itemLikedLikes + 1;
+    setItems(itemsforLike);
+  };
 
   const handleSearch = (search: string) => {
     if (search.length === 0) {
@@ -35,13 +54,38 @@ const Main = () => {
       id: popupData.length + parseInt(uniqueId()),
       image: image,
       description: description,
-      time: Date.now(),
+      time: 0,
       likes: 0
     };
     setItems((items) => [newItem, ...items]);
     setDefaultItems((items) => [newItem, ...items]);
     setShowUploadPopup(false);
   };
+
+  const handleDrop = useCallback(
+    (event) => {
+      event.preventDefault();
+      setImage(event.dataTransfer.files[0]);
+      setShowUploadPopup(true);
+    },
+    [image, showUploadPopup]
+  );
+
+  const handleDropOver = useCallback(
+    (event) => {
+      event.preventDefault();
+      setDropZone(true);
+    },
+    [dropZone]
+  );
+
+  const handleDragLeave = useCallback(
+    (event) => {
+      event.preventDefault();
+      setDropZone(false);
+    },
+    [dropZone]
+  );
 
   return (
     <div className="App main">
@@ -59,20 +103,9 @@ const Main = () => {
               className={classnames('drag-drop-zone', {
                 'inside-drag-area': dropZone
               })}
-              onDrop={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setImage(e.dataTransfer.files[0]);
-                setShowUploadPopup(true);
-              }}
-              onDragOver={(e) => {
-                e.preventDefault();
-                setDropZone(true);
-              }}
-              onDragLeave={(e) => {
-                e.preventDefault();
-                setDropZone(false);
-              }}
+              onDrop={handleDrop}
+              onDragOver={handleDropOver}
+              onDragLeave={handleDragLeave}
             >
               Drag Image here to post it!
             </div>
@@ -85,9 +118,9 @@ const Main = () => {
 
       <Container>
         <Row>
-          {items.map((popup: PopupProps) => (
-            <Col xs={6} sm={4} lg={3} key={popup.id}>
-              <Popup {...popup} />
+          {items.map((item: ItemType) => (
+            <Col xs={6} sm={4} lg={3} key={item.id}>
+              <Popup {...item} handleLike={handleLike} />
             </Col>
           ))}
         </Row>
