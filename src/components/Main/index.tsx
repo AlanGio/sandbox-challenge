@@ -65,32 +65,25 @@ const Main = () => {
     setShowUploadPopup(false);
   };
 
-  const handleDrop = useCallback(
-    (event) => {
-      event.preventDefault();
-      setImage(event.dataTransfer.files[0]);
-      setShowUploadPopup(true);
-    },
-    [image, showUploadPopup]
-  );
+  const handleDrop = useCallback((event) => {
+    event.preventDefault();
+    setImage(event.dataTransfer.files[0]);
+    setShowUploadPopup(true);
+  }, []);
 
-  const handleDropOver = useCallback(
-    (event) => {
-      event.preventDefault();
-      setDropZone(true);
-    },
-    [dropZone]
-  );
+  const handleDropOver = useCallback((event) => {
+    event.preventDefault();
+    setDropZone(true);
+  }, []);
 
-  const handleDragLeave = useCallback(
-    (event) => {
-      event.preventDefault();
-      setDropZone(false);
-    },
-    [dropZone]
-  );
+  const handleDragLeave = useCallback((event) => {
+    event.preventDefault();
+    setDropZone(false);
+  }, []);
 
-  return !isLogged ? <Login handleIsLogged={() => setIsLogged(true)} /> : (
+  return !isLogged ? (
+    <Login handleIsLogged={() => setIsLogged(true)} />
+  ) : (
     <div className="App main">
       <Container>
         <Row>

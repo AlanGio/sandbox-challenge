@@ -26,7 +26,11 @@ export const Popup = ({
     </small>{' '}
     / <small>{likes} Likes</small>
     <p>{description}</p>
-    <Button className="like-button" variant="primary" onClick={(event) => handleLike(event, id)}>
+    <Button
+      className="like-button"
+      variant="primary"
+      onClick={(event) => handleLike(event, id)}
+    >
       Like
     </Button>
   </div>

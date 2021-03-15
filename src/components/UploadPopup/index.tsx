@@ -20,7 +20,7 @@ export type PopupProps = {
 
 export const UploadPopup = ({ image, onHide, show, postItem }: PopupProps) => {
   const [description, setDescription] = useState<string>('');
-  
+
   const imageToDisplay = URL.createObjectURL(image);
 
   const handleSendForm = useCallback(() => {
